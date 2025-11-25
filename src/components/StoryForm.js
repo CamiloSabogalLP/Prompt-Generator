@@ -26,6 +26,9 @@ const StoryForm = ({ onGenerate }) => {
 
   const [testTypes, setTestTypes] = useState([]);
 
+  // Error requerido para tipo de prueba
+  const [typeError, setTypeError] = useState('');
+
   // Control del dropdown
   const [openTypes, setOpenTypes] = useState(false);
 
@@ -52,11 +55,20 @@ const StoryForm = ({ onGenerate }) => {
     setAcceptanceCriteria('');
     setIsGherkin(false);
     setTestTypes([]);
+    setTypeError('');
     setOpenTypes(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // VALIDACIÓN: Tipo de prueba requerido
+    if (testTypes.length === 0) {
+      setTypeError('Debes seleccionar al menos un tipo de prueba.');
+      return;
+    }
+
+    setTypeError('');
 
     let formattedCriteria = acceptanceCriteria;
     if (isGherkin) {
@@ -102,45 +114,47 @@ ${formattedCriteria}`;
   return (
     <form onSubmit={handleSubmit} className="space-y-4 p-6 bg-white rounded-lg shadow-md">
       
-    {/* Épica + Card alineadas */}
-<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Épica + Card alineadas */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-  {/* ID ÉPICA */}
-  <div>
-    <label className="block text-sm font-medium text-gray-700">ID de la épica</label>
-    <input
-      type="text"
-      value={epicId}
-      onChange={(e) => setEpicId(e.target.value)}
-      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
-      required
-    />
-  </div>
+        {/* ID ÉPICA */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700">ID de la épica</label>
+          <input
+            type="text"
+            value={epicId}
+            onChange={(e) => setEpicId(e.target.value)}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            required
+          />
+        </div>
 
-  {/* ID CARD */}
-  <div>
-    <label className="block text-sm font-medium text-gray-700">ID de la card</label>
-    <input
-      type="text"
-      value={cardId}
-      onChange={(e) => setCardId(e.target.value)}
-      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
-      required
-    />
-  </div>
+        {/* ID CARD */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700">ID de la card</label>
+          <input
+            type="text"
+            value={cardId}
+            onChange={(e) => setCardId(e.target.value)}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+            required
+          />
+        </div>
 
-</div>
+      </div>
 
       {/* TIPO DE PRUEBA - DROPDOWN MULTISELECT */}
       <div className="relative" ref={dropdownRef}>
         <label className="block text-sm font-medium text-gray-700">
-          Tipo de Prueba
+          Tipo de Prueba *
         </label>
 
         <button
           type="button"
           onClick={() => setOpenTypes(!openTypes)}
-          className="mt-1 w-full flex justify-between items-center px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white"
+          className={`mt-1 w-full flex justify-between items-center px-3 py-2 border 
+                     ${typeError ? 'border-red-500' : 'border-gray-300'} 
+                     rounded-md shadow-sm bg-white`}
         >
           <span className="text-gray-700">
             {testTypes.length > 0
@@ -173,6 +187,10 @@ ${formattedCriteria}`;
               </label>
             ))}
           </div>
+        )}
+
+        {typeError && (
+          <p className="text-red-600 text-sm mt-1">{typeError}</p>
         )}
       </div>
 
