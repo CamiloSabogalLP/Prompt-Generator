@@ -102,29 +102,34 @@ ${formattedCriteria}`;
   return (
     <form onSubmit={handleSubmit} className="space-y-4 p-6 bg-white rounded-lg shadow-md">
       
-      {/* ID ÉPICA */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700">ID de la épica</label>
-        <input
-          type="text"
-          value={epicId}
-          onChange={(e) => setEpicId(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
-          required
-        />
-      </div>
+    {/* Épica + Card alineadas */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-      {/* ID CARD */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700">ID de la card</label>
-        <input
-          type="text"
-          value={cardId}
-          onChange={(e) => setCardId(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
-          required
-        />
-      </div>
+  {/* ID ÉPICA */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700">ID de la épica</label>
+    <input
+      type="text"
+      value={epicId}
+      onChange={(e) => setEpicId(e.target.value)}
+      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+      required
+    />
+  </div>
+
+  {/* ID CARD */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700">ID de la card</label>
+    <input
+      type="text"
+      value={cardId}
+      onChange={(e) => setCardId(e.target.value)}
+      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+      required
+    />
+  </div>
+
+</div>
 
       {/* TIPO DE PRUEBA - DROPDOWN MULTISELECT */}
       <div className="relative" ref={dropdownRef}>
