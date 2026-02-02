@@ -98,7 +98,7 @@ columna Status: TO DO
 columna Step Summary: el DADO QUE (la columna SOLO debe llamar Step Summary)
 columna Test Data: el CUANDO (la columna SOLO debe llamar Test Data)
 columna Expected Result: el ENTONCES (la columna SOLO debe llamar Expected Result)
-columna Automatizable: true / false (baja las dos opciones y que el usuario final elija)
+columna Automatizable: True / False (baja las dos opciones y que el usuario final elija)
 columna Test-Type:  UI / API (baja las dos opciones y que el usuario final elija)
 
 Nombre de la card:
