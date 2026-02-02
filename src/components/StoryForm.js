@@ -108,10 +108,7 @@ Descripción:
 ${description}
 
 Criterios de aceptación:
-${formattedCriteria}
-
-
-Genera la tabla como respuesta y adicional un excel descargable con el nombre "test cases "+" Story Linkages"`;
+${formattedCriteria}`;
 
     onGenerate(prompt);
   };
